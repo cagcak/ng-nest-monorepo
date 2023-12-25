@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "outDir": "../out-tsc/spec",
+    "target": "esnext",
+    "module": "esnext",
+    "types": ["jasmine"]
+  },
+  "include": ["src/**/*.spec.ts", "src/**/*.d.ts"]
+}
