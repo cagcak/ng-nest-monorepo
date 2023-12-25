@@ -66,6 +66,8 @@ services:
       dockerfile: ./server/Dockerfile
       target: dev
     depends_on:
+      - db
+      - gateway
       - public
     ports:
       - '8080:80'

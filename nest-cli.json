@@ -5,5 +5,18 @@
   "compilerOptions": {
     "deleteOutDir": true,
     "tsConfigPath": "tsconfig.json"
+  },
+  "monorepo": true,
+  "root": ".",
+  "projects": {
+    "database": {
+      "type": "library",
+      "root": "database",
+      "entryFile": "index",
+      "sourceRoot": "database/src",
+      "compilerOptions": {
+        "tsConfigPath": "database/tsconfig.lib.json"
+      }
+    }
   }
 }

@@ -6,6 +6,7 @@
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "outDir": "./dist",
@@ -25,7 +26,11 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "useDefineForClassFields": false,
-    "lib": ["ES2022", "dom", "ESNext"]
+    "lib": ["ES2022", "dom", "ESNext"],
+    "paths": {
+      "@basgoz/database": ["database/src"],
+      "@basgoz/database/*": ["database/src/*"]
+    }
   },
-  "exclude": ["public/**/*"]
+  "exclude": ["public", "dist", "test"]
 }
