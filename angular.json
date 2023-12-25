@@ -29,7 +29,7 @@
             "server": "public/src/main.server.ts",
             "prerender": true,
             "ssr": {
-              "entry": "server.ts"
+              "entry": "public/src/main.server.ts"
             }
           },
           "configurations": {

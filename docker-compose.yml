@@ -1,0 +1,79 @@
+version: '3.8'
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  db:
+    image: postgres
+    container_name: basgoz_database
+    env_file:
+      - ./.env
+    hostname: localhost
+    ports:
+      - '${DB_PORT}:${DB_PORT}'
+    environment:
+      - POSTGRES_HOST=${DB_HOST}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - 'postgresdb_data:/data'
+    networks:
+      - app-tier
+
+  gateway:
+    container_name: basgoz-gateway
+    build:
+      context: .
+      dockerfile: ./src/Dockerfile
+      target: development
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+    volumes:
+      - ./src/:/app/src
+      - /app/node_modules
+    ports:
+      - '${GATEWAY_PORT}:${GATEWAY_PORT}'
+      - 9229:9229
+    expose:
+      - '${GATEWAY_PORT}:${GATEWAY_PORT}'
+    networks:
+      - app-tier
+
+  public:
+    container_name: basgoz_public
+    build:
+      context: .
+      dockerfile: ./public/Dockerfile
+    depends_on:
+      - db
+      - gateway
+    env_file:
+      - ./.env
+    networks:
+      - app-tier
+    volumes:
+      - ./:/app
+
+  nginx:
+    container_name: basgoz_nginx
+    build:
+      context: .
+      dockerfile: ./server/Dockerfile
+      target: dev
+    depends_on:
+      - public
+    ports:
+      - '8080:80'
+    networks:
+      - app-tier
+    volumes:
+      - ./:/app
+
+volumes:
+  postgresdb_data:
+    driver: local
