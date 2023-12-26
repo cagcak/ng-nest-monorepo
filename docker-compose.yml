@@ -7,7 +7,7 @@ networks:
 services:
   db:
     image: postgres
-    container_name: basgoz_database
+    container_name: ng-nest-monorepo_database
     env_file:
       - ./.env
     hostname: localhost
@@ -24,7 +24,7 @@ services:
       - app-tier
 
   gateway:
-    container_name: basgoz-gateway
+    container_name: ng-nest-monorepo-gateway
     build:
       context: .
       dockerfile: ./src/Dockerfile
@@ -45,7 +45,7 @@ services:
       - app-tier
 
   public:
-    container_name: basgoz_public
+    container_name: ng-nest-monorepo_public
     build:
       context: .
       dockerfile: ./public/Dockerfile
@@ -60,7 +60,7 @@ services:
       - ./:/app
 
   nginx:
-    container_name: basgoz_nginx
+    container_name: ng-nest-monorepo_nginx
     build:
       context: .
       dockerfile: ./server/Dockerfile

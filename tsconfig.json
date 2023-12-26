@@ -28,8 +28,8 @@
     "useDefineForClassFields": false,
     "lib": ["ES2022", "dom", "ESNext"],
     "paths": {
-      "@basgoz/database": ["database/src"],
-      "@basgoz/database/*": ["database/src/*"]
+      "@ng-nest-monorepo/database": ["database/src"],
+      "@ng-nest-monorepo/database/*": ["database/src/*"]
     }
   },
   "exclude": ["public", "dist", "test"]
